@@ -352,7 +352,7 @@ function EditorialPreview({ page, onNavigate }: DemoProps) {
 
         {page === 'about' && <section className="editorial-about">
           <div><p className="demo-kicker">About the journal</p><h2>Curiosity, made useful.</h2><p>We publish stories about the spaces, objects, and rituals that shape daily life. New editions arrive twice a month.</p></div>
-          {subscribed ? <div className="form-success" role="status"><strong>You are on the list.</strong><p>The next edition will arrive in your inbox.</p><button className="text-link" onClick={() => setSubscribed(false)}>Use another address</button></div> :
+          {subscribed ? <output className="form-success"><strong>You are on the list.</strong><span>The next edition will arrive in your inbox.</span><button className="text-link" onClick={() => setSubscribed(false)}>Use another address</button></output> :
             <form className="demo-form" onSubmit={(event) => { event.preventDefault(); setSubscribed(true) }}>
               <label htmlFor="editorial-email">Email address</label><input id="editorial-email" type="email" required placeholder="you@example.com" />
               <small>Two thoughtful emails each month. Unsubscribe at any time.</small><button className="demo-button" type="submit">Join the journal</button>
@@ -399,7 +399,7 @@ function CommercePreview({ page, onNavigate }: DemoProps) {
           <div className="product-copy"><p className="demo-kicker">Portable light</p><h2>Fold lamp</h2><p className="product-price">£180</p><p>A compact, dimmable lamp with a folded aluminium shade and warm, even light.</p>
             <fieldset><legend>Finish</legend><div className="variant-row">{['Chalk', 'Cobalt', 'Carbon'].map((item) => <button type="button" key={item} aria-pressed={finish === item} onClick={() => setFinish(item)}>{item}</button>)}</div></fieldset>
             <button className="demo-button add-button" onClick={() => setBagCount((current) => current + 1)}>Add {finish} to bag</button>
-            {bagCount > 0 && <p className="inline-feedback" role="status">Bag now contains {bagCount} {bagCount === 1 ? 'item' : 'items'}.</p>}
+            {bagCount > 0 && <output className="inline-feedback">Bag now contains {bagCount} {bagCount === 1 ? 'item' : 'items'}.</output>}
           </div>
         </section>}
 
@@ -443,7 +443,7 @@ function PortfolioPreview({ page, onNavigate }: DemoProps) {
 
         {page === 'about' && <section className="portfolio-about">
           <div><p className="demo-kicker">Small team, close work</p><h2>Strategy through launch, without the handoffs.</h2><p>We partner with thoughtful teams on brand systems, digital products, and campaigns.</p></div>
-          {sent ? <div className="form-success dark-success" role="status"><strong>Brief received.</strong><p>We will reply within two working days.</p><button className="text-link" onClick={() => setSent(false)}>Send another</button></div> : <form className="demo-form" onSubmit={(event) => { event.preventDefault(); setSent(true) }}><label htmlFor="project-name">Your name</label><input id="project-name" required /><label htmlFor="project-email">Email address</label><input id="project-email" type="email" required /><label htmlFor="project-brief">What are you making?</label><textarea id="project-brief" required rows={3} /><button className="demo-button" type="submit">Send brief</button></form>}
+          {sent ? <output className="form-success dark-success"><strong>Brief received.</strong><span>We will reply within two working days.</span><button className="text-link" onClick={() => setSent(false)}>Send another</button></output> : <form className="demo-form" onSubmit={(event) => { event.preventDefault(); setSent(true) }}><label htmlFor="project-name">Your name</label><input id="project-name" required /><label htmlFor="project-email">Email address</label><input id="project-email" type="email" required /><label htmlFor="project-brief">What are you making?</label><textarea id="project-brief" required rows={3} /><button className="demo-button" type="submit">Send brief</button></form>}
         </section>}
       </main>
     </div>

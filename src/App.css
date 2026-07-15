@@ -99,9 +99,9 @@ button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px 
 .demo-form input::placeholder { color: color-mix(in srgb, var(--preview-text) 58%, transparent); }
 .demo-form small { margin-bottom: 6px; color: color-mix(in srgb, var(--preview-text) 65%, transparent); font-size: 8px; line-height: 1.45; }
 .demo-form .demo-button { justify-self: start; margin-top: 5px; }
-.form-success { align-self: start; padding: 26px; border: 1px solid color-mix(in srgb, var(--preview-text) 28%, transparent); border-radius: 7px; background: color-mix(in srgb, var(--preview-soft) 45%, var(--preview-bg)); }
+.form-success { display: block; align-self: start; padding: 26px; border: 1px solid color-mix(in srgb, var(--preview-text) 28%, transparent); border-radius: 7px; background: color-mix(in srgb, var(--preview-soft) 45%, var(--preview-bg)); }
 .form-success strong { display: block; margin-bottom: 6px; font-size: 18px; }
-.form-success p { margin: 0 0 18px; font-size: 10px; line-height: 1.5; }
+.form-success > span { display: block; margin: 0 0 18px; font-size: 10px; line-height: 1.5; }
 
 .editorial-heading { display: grid; grid-template-columns: 1fr 5fr; align-items: start; gap: 3%; }
 .editorial-grid { display: grid; grid-template-columns: 1.7fr 1fr; gap: 5%; margin-top: 5%; padding-top: 4%; border-top: 1px solid color-mix(in srgb, var(--preview-text) 25%, transparent); }
@@ -171,7 +171,7 @@ button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px 
 .product-copy fieldset { margin: 22px 0 0; padding: 0; border: 0; }
 .product-copy legend { margin-bottom: 8px; font-size: 8px; font-weight: 800; }
 .add-button { width: 100%; margin-top: 18px; }
-.inline-feedback { margin: 9px 0 0; color: var(--preview-accent); font-size: 8px; font-weight: 800; }
+.inline-feedback { display: block; margin: 9px 0 0; color: var(--preview-accent); font-size: 8px; font-weight: 800; }
 .bag-panel { position: absolute; top: 58px; right: 0; z-index: 1; width: min(310px, 78%); box-sizing: border-box; padding: 20px; border: 1px solid color-mix(in srgb, var(--preview-text) 25%, transparent); border-top: 0; border-right: 0; border-radius: 0 0 0 7px; background: var(--preview-bg); box-shadow: 0 18px 40px color-mix(in srgb, var(--preview-text) 16%, transparent); }
 .bag-panel > div:first-child { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
 .bag-panel > div:first-child > strong { font-size: 17px; }
