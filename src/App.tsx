@@ -31,17 +31,17 @@ const palettes: Palette[] = [
 
 const fonts: FontPair[] = [
   { id: 'swiss', name: 'Swiss utility', heading: 'Arial, Helvetica, sans-serif', body: 'Arial, Helvetica, sans-serif', label: 'Aa', note: 'Clear, direct, adaptable' },
-  { id: 'editorial', name: 'Editorial contrast', heading: 'Georgia, Times New Roman, serif', body: 'Arial, Helvetica, sans-serif', label: 'Ag', note: 'Expressive, considered, literary' },
-  { id: 'humanist', name: 'Humanist warmth', heading: 'Trebuchet MS, sans-serif', body: 'Verdana, sans-serif', label: 'Rt', note: 'Friendly, open, readable' },
-  { id: 'mono', name: 'Technical mono', heading: 'Courier New, monospace', body: 'Arial, Helvetica, sans-serif', label: 'Mm', note: 'Structured, precise, distinctive' },
-  { id: 'system', name: 'System modern', heading: '-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif', body: '-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif', label: 'Sy', note: 'Native, fast, familiar' },
-  { id: 'grotesk', name: 'Modern grotesk', heading: 'Avenir Next, Avenir, Helvetica Neue, sans-serif', body: 'Helvetica Neue, Arial, sans-serif', label: 'Gg', note: 'Polished, balanced, contemporary' },
-  { id: 'geometric', name: 'Geometric display', heading: 'Century Gothic, Futura, sans-serif', body: 'Arial, Helvetica, sans-serif', label: 'Oo', note: 'Graphic, circular, confident' },
-  { id: 'book', name: 'Classic book', heading: 'Palatino, Book Antiqua, serif', body: 'Palatino, Book Antiqua, serif', label: 'Bb', note: 'Measured, cultured, readable' },
-  { id: 'fashion', name: 'Fashion contrast', heading: 'Didot, Bodoni 72, Times New Roman, serif', body: 'Helvetica Neue, Arial, sans-serif', label: 'Ff', note: 'Sharp, elegant, high contrast' },
-  { id: 'rounded', name: 'Rounded friendly', heading: 'Arial Rounded MT Bold, Trebuchet MS, sans-serif', body: 'Trebuchet MS, sans-serif', label: 'Rr', note: 'Soft, playful, approachable' },
-  { id: 'condensed', name: 'Condensed impact', heading: 'Impact, Haettenschweiler, Arial Narrow Bold, sans-serif', body: 'Arial, Helvetica, sans-serif', label: 'Cn', note: 'Loud, compact, campaign-led' },
-  { id: 'code', name: 'Code and copy', heading: 'Menlo, Monaco, Consolas, monospace', body: '-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif', label: '<_', note: 'Technical, crisp, developer-led' },
+  { id: 'editorial', name: 'Editorial contrast', heading: 'Georgia, "Times New Roman", serif', body: 'Arial, Helvetica, sans-serif', label: 'Ag', note: 'Expressive, considered, literary' },
+  { id: 'humanist', name: 'Humanist warmth', heading: '"Trebuchet MS", sans-serif', body: 'Verdana, sans-serif', label: 'Rt', note: 'Friendly, open, readable' },
+  { id: 'mono', name: 'Technical mono', heading: '"Courier New", monospace', body: 'Arial, Helvetica, sans-serif', label: 'Mm', note: 'Structured, precise, distinctive' },
+  { id: 'system', name: 'System modern', heading: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', body: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', label: 'Sy', note: 'Native, fast, familiar' },
+  { id: 'grotesk', name: 'Modern grotesk', heading: '"Avenir Next", Avenir, "Helvetica Neue", sans-serif', body: '"Helvetica Neue", Arial, sans-serif', label: 'Gg', note: 'Polished, balanced, contemporary' },
+  { id: 'geometric', name: 'Geometric display', heading: '"Century Gothic", Futura, sans-serif', body: 'Arial, Helvetica, sans-serif', label: 'Oo', note: 'Graphic, circular, confident' },
+  { id: 'book', name: 'Classic book', heading: 'Palatino, "Book Antiqua", serif', body: 'Palatino, "Book Antiqua", serif', label: 'Bb', note: 'Measured, cultured, readable' },
+  { id: 'fashion', name: 'Fashion contrast', heading: 'Didot, "Bodoni 72", "Times New Roman", serif', body: '"Helvetica Neue", Arial, sans-serif', label: 'Ff', note: 'Sharp, elegant, high contrast' },
+  { id: 'rounded', name: 'Rounded friendly', heading: '"Arial Rounded MT Bold", "Trebuchet MS", sans-serif', body: '"Trebuchet MS", sans-serif', label: 'Rr', note: 'Soft, playful, approachable' },
+  { id: 'condensed', name: 'Condensed impact', heading: 'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif', body: 'Arial, Helvetica, sans-serif', label: 'Cn', note: 'Loud, compact, campaign-led' },
+  { id: 'code', name: 'Code and copy', heading: 'Menlo, Monaco, Consolas, monospace', body: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', label: '<_', note: 'Technical, crisp, developer-led' },
 ]
 
 const templates: { id: TemplateName; name: string; note: string }[] = [
