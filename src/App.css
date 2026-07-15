@@ -37,6 +37,9 @@ button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px 
 .control-group summary::after, .pack-section summary::after { content: "+"; color: var(--muted); font-weight: 400; }
 .control-group[open] > summary, .pack-section[open] > summary { margin-bottom: 13px; }
 .control-group[open] > summary::after, .pack-section[open] > summary::after { content: "-"; }
+.brand-fields { display: grid; gap: 10px; }
+.brand-fields label { display: grid; gap: 5px; color: var(--muted); font-size: 9px; font-weight: 700; }
+.brand-fields input, .brand-fields textarea { width: 100%; box-sizing: border-box; padding: 9px; border: 1px solid var(--line); border-radius: 7px; background: transparent; color: var(--ink); font: 11px/1.4 inherit; resize: vertical; }
 .palette-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
 .font-list { display: grid; gap: 7px; }
 .palette-option, .font-option, .direction-list button, .motion-list button { width: 100%; padding: 9px; border-radius: 9px; background: transparent; text-align: left; transition: background-color 160ms ease, transform 160ms ease; }
