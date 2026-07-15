@@ -4,8 +4,8 @@ import {
   downloadDesignMarkdown,
   downloadDesignPack,
   downloadTokens,
+  motionPresets,
   type FontPair,
-  type MotionSetting,
   type PackConfig,
   type Palette,
   type TemplateName,
@@ -17,6 +17,16 @@ const palettes: Palette[] = [
   { id: 'cobalt', name: 'Cobalt', background: '#eff2f8', foreground: '#121b32', accent: '#2854c5', soft: '#bdcee9' },
   { id: 'forest', name: 'Forest', background: '#edf0e7', foreground: '#17231b', accent: '#2f6b4f', soft: '#c8a66a' },
   { id: 'carbon', name: 'Carbon', background: '#191a18', foreground: '#f0eee7', accent: '#d5ff52', soft: '#3c4038' },
+  { id: 'lavender', name: 'Lavender', background: '#f1effa', foreground: '#211b38', accent: '#6a4fb3', soft: '#d8cff2' },
+  { id: 'rosewood', name: 'Rosewood', background: '#f7eff1', foreground: '#301820', accent: '#a83f5c', soft: '#e5bdc8' },
+  { id: 'tide', name: 'Tide', background: '#eaf4f3', foreground: '#15302e', accent: '#16766d', soft: '#b9dad6' },
+  { id: 'sorbet', name: 'Sorbet', background: '#fff3ec', foreground: '#34211a', accent: '#d4552e', soft: '#f2c9b5' },
+  { id: 'clay', name: 'Clay slate', background: '#ecefeb', foreground: '#202825', accent: '#a94f35', soft: '#b8c5c0' },
+  { id: 'solar', name: 'Solar', background: '#f8f3d7', foreground: '#28240d', accent: '#a96900', soft: '#e7d36e' },
+  { id: 'ice', name: 'Ice', background: '#edf6fa', foreground: '#132a36', accent: '#25769b', soft: '#bfdce8' },
+  { id: 'night-rose', name: 'Night rose', background: '#1d1820', foreground: '#f5edf4', accent: '#f071a1', soft: '#4a3040' },
+  { id: 'newsprint', name: 'Newsprint', background: '#f1f0eb', foreground: '#191919', accent: '#4b4b4b', soft: '#d1cfc5' },
+  { id: 'mint', name: 'Mint', background: '#eff8ef', foreground: '#16351b', accent: '#3b7f49', soft: '#c8e5cc' },
 ]
 
 const fonts: FontPair[] = [
@@ -24,6 +34,14 @@ const fonts: FontPair[] = [
   { id: 'editorial', name: 'Editorial contrast', heading: 'Georgia, Times New Roman, serif', body: 'Arial, Helvetica, sans-serif', label: 'Ag', note: 'Expressive, considered, literary' },
   { id: 'humanist', name: 'Humanist warmth', heading: 'Trebuchet MS, sans-serif', body: 'Verdana, sans-serif', label: 'Rt', note: 'Friendly, open, readable' },
   { id: 'mono', name: 'Technical mono', heading: 'Courier New, monospace', body: 'Arial, Helvetica, sans-serif', label: 'Mm', note: 'Structured, precise, distinctive' },
+  { id: 'system', name: 'System modern', heading: '-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif', body: '-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif', label: 'Sy', note: 'Native, fast, familiar' },
+  { id: 'grotesk', name: 'Modern grotesk', heading: 'Avenir Next, Avenir, Helvetica Neue, sans-serif', body: 'Helvetica Neue, Arial, sans-serif', label: 'Gg', note: 'Polished, balanced, contemporary' },
+  { id: 'geometric', name: 'Geometric display', heading: 'Century Gothic, Futura, sans-serif', body: 'Arial, Helvetica, sans-serif', label: 'Oo', note: 'Graphic, circular, confident' },
+  { id: 'book', name: 'Classic book', heading: 'Palatino, Book Antiqua, serif', body: 'Palatino, Book Antiqua, serif', label: 'Bb', note: 'Measured, cultured, readable' },
+  { id: 'fashion', name: 'Fashion contrast', heading: 'Didot, Bodoni 72, Times New Roman, serif', body: 'Helvetica Neue, Arial, sans-serif', label: 'Ff', note: 'Sharp, elegant, high contrast' },
+  { id: 'rounded', name: 'Rounded friendly', heading: 'Arial Rounded MT Bold, Trebuchet MS, sans-serif', body: 'Trebuchet MS, sans-serif', label: 'Rr', note: 'Soft, playful, approachable' },
+  { id: 'condensed', name: 'Condensed impact', heading: 'Impact, Haettenschweiler, Arial Narrow Bold, sans-serif', body: 'Arial, Helvetica, sans-serif', label: 'Cn', note: 'Loud, compact, campaign-led' },
+  { id: 'code', name: 'Code and copy', heading: 'Menlo, Monaco, Consolas, monospace', body: '-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif', label: '<_', note: 'Technical, crisp, developer-led' },
 ]
 
 const templates: { id: TemplateName; name: string; note: string }[] = [
@@ -32,17 +50,12 @@ const templates: { id: TemplateName; name: string; note: string }[] = [
   { id: 'portfolio', name: 'Portfolio', note: 'Projects and practice' },
 ]
 
-const motions: MotionSetting[] = [
-  { id: 'still', name: 'Still', duration: 0, note: 'No automatic motion' },
-  { id: 'calm', name: 'Calm', duration: 360, note: 'Soft reveals and feedback' },
-  { id: 'kinetic', name: 'Kinetic', duration: 700, note: 'Expressive staged movement' },
-]
-
 function App() {
   const [palette, setPalette] = useState(palettes[0])
   const [font, setFont] = useState(fonts[0])
   const [template, setTemplate] = useState<TemplateName>('editorial')
-  const [motion, setMotion] = useState(motions[1])
+  const [motion, setMotion] = useState(motionPresets[2])
+  const [motionRun, setMotionRun] = useState(0)
   const [viewport, setViewport] = useState<'desktop' | 'mobile'>('desktop')
   const [exportStatus, setExportStatus] = useState('Ready to export')
 
@@ -55,6 +68,10 @@ function App() {
     '--preview-heading': font.heading,
     '--preview-body': font.body,
     '--preview-speed': `${motion.duration}ms`,
+    '--preview-from': motion.transform,
+    '--preview-ease': motion.ease,
+    '--preview-stagger': `${motion.stagger}ms`,
+    '--preview-opacity': motion.fromOpacity,
   } as CSSProperties
 
   function updateColour(key: 'background' | 'foreground' | 'accent') {
@@ -155,8 +172,8 @@ function App() {
           <fieldset className="control-group">
             <legend>Motion</legend>
             <div className="motion-list">
-              {motions.map((item) => (
-                <button aria-pressed={motion.id === item.id} key={item.id} onClick={() => setMotion(item)}>
+              {motionPresets.map((item) => (
+                <button aria-pressed={motion.id === item.id} key={item.id} onClick={() => { setMotion(item); setMotionRun((current) => current + 1) }}>
                   <strong>{item.name}</strong><small>{item.note}</small>
                 </button>
               ))}
@@ -170,13 +187,16 @@ function App() {
               <span>Live preview</span>
               <strong>{templates.find((item) => item.id === template)?.name}</strong>
             </div>
-            <div className="viewport-toggle" aria-label="Preview size">
-              <button aria-pressed={viewport === 'desktop'} onClick={() => setViewport('desktop')}>Desktop</button>
-              <button aria-pressed={viewport === 'mobile'} onClick={() => setViewport('mobile')}>Mobile</button>
+            <div className="preview-actions">
+              <button className="replay-button" onClick={() => setMotionRun((current) => current + 1)}>Replay motion</button>
+              <div className="viewport-toggle" aria-label="Preview size">
+                <button aria-pressed={viewport === 'desktop'} onClick={() => setViewport('desktop')}>Desktop</button>
+                <button aria-pressed={viewport === 'mobile'} onClick={() => setViewport('mobile')}>Mobile</button>
+              </div>
             </div>
           </div>
           <div className={`preview-stage ${viewport}`}>
-            <div className="site-preview" style={previewStyle} key={`${template}-${motion.id}`}>
+            <div className="site-preview" style={previewStyle} key={`${template}-${motion.id}-${motionRun}`}>
               {template === 'editorial' && <EditorialPreview />}
               {template === 'commerce' && <CommercePreview />}
               {template === 'portfolio' && <PortfolioPreview />}
