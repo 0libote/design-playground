@@ -28,6 +28,18 @@ export type MotionSetting = {
 export type TemplateName = 'editorial' | 'commerce' | 'portfolio'
 export type PackConfig = { palette: Palette; font: FontPair; template: TemplateName; motion: MotionSetting }
 
+const exampleNames: Record<TemplateName, string> = {
+  editorial: 'THE COMMON ROOM',
+  commerce: 'FORM OBJECTS',
+  portfolio: 'MARA STUDIO',
+}
+
+const exampleTitles: Record<TemplateName, string> = {
+  editorial: 'Ideas for better places.',
+  commerce: 'Objects with a quiet purpose.',
+  portfolio: 'Clear ideas, impossible to ignore.',
+}
+
 export function buildDesignMarkdown({ palette, font, template, motion }: PackConfig) {
   return `# Design Direction: ${palette.name} / ${font.name}
 
@@ -228,7 +240,7 @@ async function makeExample(config: PackConfig, template: TemplateName) {
     context.fillRect(0, 0, 1440, 900)
     context.fillStyle = palette.foreground
     context.font = `700 24px ${font.heading}`
-    context.fillText(template === 'editorial' ? 'THE COMMON ROOM' : template === 'commerce' ? 'FORM OBJECTS' : 'MARA STUDIO', 70, 70)
+    context.fillText(exampleNames[template], 70, 70)
     context.font = `400 18px ${font.body}`
     context.fillText('Work       About       Enquire', 1050, 70)
     context.fillStyle = mix(palette.foreground, palette.background, .76)
@@ -238,8 +250,7 @@ async function makeExample(config: PackConfig, template: TemplateName) {
     context.fillText(template.toUpperCase(), 70, 162)
     context.fillStyle = palette.foreground
     context.font = `700 ${template === 'portfolio' ? 78 : 92}px ${font.heading}`
-    const title = template === 'editorial' ? 'Ideas for better places.' : template === 'commerce' ? 'Objects with a quiet purpose.' : 'Clear ideas, impossible to ignore.'
-    wrapText(context, title, 70, 260, 920, 94)
+    wrapText(context, exampleTitles[template], 70, 260, 920, 94)
 
     if (template === 'editorial') {
       block(context, 70, 500, 820, 270, palette.soft)

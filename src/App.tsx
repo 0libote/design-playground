@@ -213,7 +213,7 @@ function App() {
           </div>
 
           <button className="download-primary" onClick={() => runExport('design pack', () => downloadDesignPack(config))}>
-            Download ZIP
+            <strong>Download ZIP</strong>
             <span>Complete handoff</span>
           </button>
 
@@ -223,15 +223,15 @@ function App() {
             <button onClick={() => runExport('design board', () => downloadBoard(config))}>Board PNG</button>
           </div>
 
-          <p className="export-status" role="status">{exportStatus}</p>
+          <output className="export-status">{exportStatus}</output>
         </aside>
       </main>
     </div>
   )
 }
 
-function PreviewNav({ name }: { name: string }) {
-  return <nav className="demo-nav"><strong>{name}</strong><span>Work</span><span>About</span><button>Enquire</button></nav>
+function PreviewNav({ name }: Readonly<{ name: string }>) {
+  return <div className="demo-nav"><strong>{name}</strong><span>Work</span><span>About</span><span className="demo-button">Enquire</span></div>
 }
 
 function EditorialPreview() {
@@ -255,7 +255,7 @@ function CommercePreview() {
     <div className="demo-page commerce-demo">
       <PreviewNav name="Form Objects" />
       <main>
-        <div className="shop-hero"><div><p className="demo-kicker">New collection</p><h2>Objects with a quiet purpose.</h2><button>Shop the edit</button></div><div className="product-hero"><span>Form 01</span></div></div>
+        <div className="shop-hero"><div><p className="demo-kicker">New collection</p><h2>Objects with a quiet purpose.</h2><span className="demo-button">Shop the edit</span></div><div className="product-hero"><span>Form 01</span></div></div>
         <div className="product-row"><article><div /><h3>Fold lamp</h3><p>£180</p></article><article><div /><h3>Contour vessel</h3><p>£95</p></article><article><div /><h3>Line tray</h3><p>£62</p></article></div>
       </main>
     </div>
