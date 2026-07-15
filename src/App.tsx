@@ -112,8 +112,8 @@ function App() {
             <p>Change the ingredients. The preview responds instantly.</p>
           </div>
 
-          <fieldset className="control-group">
-            <legend>Colour</legend>
+          <details className="control-group" open>
+            <summary>Colour</summary>
             <div className="palette-list">
               {palettes.map((item) => (
                 <button
@@ -139,10 +139,10 @@ function App() {
                 </label>
               ))}
             </div>
-          </fieldset>
+          </details>
 
-          <fieldset className="control-group">
-            <legend>Type</legend>
+          <details className="control-group" open>
+            <summary>Type</summary>
             <div className="font-list">
               {fonts.map((item) => (
                 <button
@@ -156,10 +156,10 @@ function App() {
                 </button>
               ))}
             </div>
-          </fieldset>
+          </details>
 
-          <fieldset className="control-group">
-            <legend>Direction</legend>
+          <details className="control-group" open>
+            <summary>Direction</summary>
             <div className="direction-list">
               {templates.map((item) => (
                 <button aria-pressed={template === item.id} key={item.id} onClick={() => setTemplate(item.id)}>
@@ -167,10 +167,10 @@ function App() {
                 </button>
               ))}
             </div>
-          </fieldset>
+          </details>
 
-          <fieldset className="control-group">
-            <legend>Motion</legend>
+          <details className="control-group" open>
+            <summary>Motion</summary>
             <div className="motion-list">
               {motionPresets.map((item) => (
                 <button aria-pressed={motion.id === item.id} key={item.id} onClick={() => { setMotion(item); setMotionRun((current) => current + 1) }}>
@@ -178,7 +178,7 @@ function App() {
                 </button>
               ))}
             </div>
-          </fieldset>
+          </details>
         </aside>
 
         <section className="preview-area" aria-label="Live website preview">
@@ -211,26 +211,29 @@ function App() {
             <p>A practical handoff for recreating this direction.</p>
           </div>
 
-          <div className="receipt">
-            <div className="receipt-swatches" aria-label="Selected palette">
-              {[palette.background, palette.foreground, palette.accent, palette.soft].map((colour) => (
-                <span key={colour} style={{ background: colour }} title={colour} />
-              ))}
+          <details className="pack-section" open>
+            <summary>Current choices</summary>
+            <div className="receipt">
+              <div className="receipt-swatches" aria-label="Selected palette">
+                {[palette.background, palette.foreground, palette.accent, palette.soft].map((colour) => (
+                  <span key={colour} style={{ background: colour }} title={colour} />
+                ))}
+              </div>
+              <dl>
+                <div><dt>Heading</dt><dd style={{ fontFamily: font.heading }}>{font.name}</dd></div>
+                <div><dt>Template</dt><dd>{template}</dd></div>
+                <div><dt>Motion</dt><dd>{motion.name}</dd></div>
+              </dl>
             </div>
-            <dl>
-              <div><dt>Heading</dt><dd style={{ fontFamily: font.heading }}>{font.name}</dd></div>
-              <div><dt>Template</dt><dd>{template}</dd></div>
-              <div><dt>Motion</dt><dd>{motion.name}</dd></div>
-            </dl>
-          </div>
+          </details>
 
-          <div className="pack-contents">
-            <h3>Inside the ZIP</h3>
+          <details className="pack-section pack-contents" open>
+            <summary>Inside the ZIP</summary>
             <div className="file-grid">
               <span>DESIGN.md</span><span>tokens.css</span><span>motion.css</span>
               <span>Design board PNG</span><span>3 example PNGs</span><span>Pack notes</span>
             </div>
-          </div>
+          </details>
 
           <button className="download-primary" onClick={() => runExport('design pack', () => downloadDesignPack(config))}>
             <strong>Download ZIP</strong>

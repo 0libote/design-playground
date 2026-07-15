@@ -11,7 +11,7 @@
 
 button { border: 0; cursor: pointer; }
 button:active { transform: translateY(1px); }
-button:focus-visible, input:focus-visible { outline: 3px solid color-mix(in srgb, var(--active) 55%, transparent); outline-offset: 2px; }
+button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid color-mix(in srgb, var(--active) 55%, transparent); outline-offset: 2px; }
 
 .app-shell { min-height: 100dvh; background: var(--shell-bg); color: var(--ink); }
 .topbar { height: 68px; display: grid; grid-template-columns: 310px 1fr auto; align-items: center; gap: 24px; padding: 0 20px; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--panel-bg) 90%, transparent); position: sticky; top: 0; z-index: 2; backdrop-filter: blur(16px); }
@@ -22,17 +22,21 @@ button:focus-visible, input:focus-visible { outline: 3px solid color-mix(in srgb
 .top-export, .download-primary { background: var(--ink); color: var(--panel-bg); border-radius: 9px; font-weight: 700; }
 .top-export { padding: 11px 16px; white-space: nowrap; }
 
-.workspace { display: grid; grid-template-columns: 310px minmax(480px, 1fr) 280px; min-height: calc(100dvh - 68px); }
-.controls, .pack-panel { background: var(--panel-bg); padding: 24px 20px; }
-.controls { border-right: 1px solid var(--line); overflow-y: auto; }
+.workspace { display: grid; grid-template-columns: 310px minmax(480px, 1fr) 280px; height: calc(100dvh - 68px); min-height: 0; overflow: hidden; }
+.controls, .pack-panel { min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; background: var(--panel-bg); padding: 24px 20px; }
+.controls { border-right: 1px solid var(--line); }
 .pack-panel { border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 24px; }
 .panel-intro { padding-bottom: 24px; border-bottom: 1px solid var(--line); }
 .eyebrow { display: block; margin-bottom: 10px; color: var(--active-ink); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .panel-intro h1 { max-width: 260px; margin: 0 0 10px; font-size: 28px; line-height: 1.02; letter-spacing: -.045em; }
 .panel-intro p, .pack-panel > div:first-child p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
 
-.control-group { margin: 0; padding: 22px 0; border: 0; border-bottom: 1px solid var(--line); }
-.control-group legend { margin-bottom: 13px; padding: 0; font-size: 13px; font-weight: 800; }
+.control-group { margin: 0; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.control-group summary, .pack-section summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; list-style: none; cursor: pointer; font-size: 13px; font-weight: 800; }
+.control-group summary::-webkit-details-marker, .pack-section summary::-webkit-details-marker { display: none; }
+.control-group summary::after, .pack-section summary::after { content: "+"; color: var(--muted); font-weight: 400; }
+.control-group[open] > summary, .pack-section[open] > summary { margin-bottom: 13px; }
+.control-group[open] > summary::after, .pack-section[open] > summary::after { content: "-"; }
 .palette-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
 .font-list { display: grid; gap: 7px; }
 .palette-option, .font-option, .direction-list button, .motion-list button { width: 100%; padding: 9px; border-radius: 9px; background: transparent; text-align: left; transition: background-color 160ms ease, transform 160ms ease; }
@@ -54,7 +58,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid color-mix(in srgb
 .motion-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; }
 .direction-list button, .motion-list button { min-height: 60px; }
 
-.preview-area { min-width: 0; padding: 20px; background-color: var(--shell-bg); background-image: linear-gradient(color-mix(in srgb, var(--line) 45%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--line) 45%, transparent) 1px, transparent 1px); background-size: 24px 24px; }
+.preview-area { min-width: 0; min-height: 0; overflow: auto; padding: 20px; background-color: var(--shell-bg); background-image: linear-gradient(color-mix(in srgb, var(--line) 45%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--line) 45%, transparent) 1px, transparent 1px); background-size: 24px 24px; }
 .preview-toolbar { height: 48px; max-width: 1020px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .preview-toolbar > div:first-child { display: flex; align-items: baseline; gap: 9px; font-size: 11px; }
 .preview-toolbar > div:first-child span { color: var(--muted); }
@@ -120,7 +124,8 @@ button:focus-visible, input:focus-visible { outline: 3px solid color-mix(in srgb
 .receipt dl div { display: flex; justify-content: space-between; gap: 12px; padding-top: 8px; font-size: 10px; }
 .receipt dt { color: var(--muted); }
 .receipt dd { margin: 0; max-width: 140px; text-align: right; text-transform: capitalize; }
-.pack-contents h3 { margin: 0 0 10px; font-size: 12px; }
+.pack-section { margin: 0; }
+.pack-section summary { font-size: 12px; }
 .file-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .file-grid span { padding: 8px; border-radius: 7px; background: color-mix(in srgb, var(--line) 36%, transparent); font-size: 9px; }
 .download-primary { padding: 14px; text-align: left; }
@@ -131,7 +136,8 @@ button:focus-visible, input:focus-visible { outline: 3px solid color-mix(in srgb
 .export-status { margin: auto 0 0; color: var(--muted); font-size: 10px; }
 
 @media (max-width: 1180px) {
-  .workspace { grid-template-columns: 290px minmax(420px, 1fr); }
+  .workspace { grid-template-columns: 290px minmax(420px, 1fr); height: auto; min-height: calc(100dvh - 68px); overflow: visible; }
+  .controls, .pack-panel { overflow-y: visible; scrollbar-gutter: auto; }
   .pack-panel { grid-column: 1 / -1; display: grid; grid-template-columns: 1.2fr 1fr 1fr; align-items: start; border: 0; border-top: 1px solid var(--line); }
   .pack-panel .download-primary, .pack-panel .single-exports, .pack-panel .export-status { grid-column: 3; }
   .pack-panel .export-status { margin: 0; }
@@ -140,7 +146,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid color-mix(in srgb
 @media (max-width: 780px) {
   .topbar { grid-template-columns: 1fr auto; height: 62px; }
   .topbar-copy { display: none; }
-  .workspace { display: block; }
+  .workspace { display: block; min-height: calc(100dvh - 62px); }
   .controls { border: 0; border-bottom: 1px solid var(--line); }
   .panel-intro h1 { max-width: 420px; }
   .preview-area { padding: 12px; overflow: hidden; }
