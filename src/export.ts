@@ -19,10 +19,14 @@ export type FontPair = {
 }
 
 export type MotionSetting = {
-  id: 'still' | 'calm' | 'kinetic'
+  id: string
   name: string
   duration: number
   note: string
+  transform: string
+  ease: string
+  stagger: number
+  fromOpacity: number
 }
 
 export type TemplateName = 'editorial' | 'commerce' | 'portfolio'
@@ -39,6 +43,19 @@ const exampleTitles: Record<TemplateName, string> = {
   commerce: 'Objects with a quiet purpose.',
   portfolio: 'Clear ideas, impossible to ignore.',
 }
+
+export const motionPresets: MotionSetting[] = [
+  { id: 'still', name: 'Still', duration: 0, note: 'No automatic motion', transform: 'none', ease: 'linear', stagger: 0, fromOpacity: 1 },
+  { id: 'fade', name: 'Fade', duration: 320, note: 'Quiet opacity reveal', transform: 'none', ease: 'ease-out', stagger: 0, fromOpacity: 0 },
+  { id: 'lift', name: 'Lift', duration: 460, note: 'Soft upward entrance', transform: 'translateY(28px)', ease: 'cubic-bezier(.16, 1, .3, 1)', stagger: 45, fromOpacity: 0 },
+  { id: 'left', name: 'From left', duration: 520, note: 'Directional slide in', transform: 'translateX(-48px)', ease: 'cubic-bezier(.16, 1, .3, 1)', stagger: 55, fromOpacity: 0 },
+  { id: 'right', name: 'From right', duration: 520, note: 'Reverse directional slide', transform: 'translateX(48px)', ease: 'cubic-bezier(.16, 1, .3, 1)', stagger: 55, fromOpacity: 0 },
+  { id: 'scale', name: 'Scale', duration: 480, note: 'Clean zoom into place', transform: 'scale(.9)', ease: 'cubic-bezier(.16, 1, .3, 1)', stagger: 40, fromOpacity: 0 },
+  { id: 'pop', name: 'Pop', duration: 560, note: 'Springy product reveal', transform: 'translateY(18px) scale(.88)', ease: 'cubic-bezier(.34, 1.56, .64, 1)', stagger: 70, fromOpacity: 0 },
+  { id: 'tilt', name: 'Tilt', duration: 600, note: 'Editorial angled entrance', transform: 'translateY(24px) rotate(-2deg)', ease: 'cubic-bezier(.16, 1, .3, 1)', stagger: 65, fromOpacity: 0 },
+  { id: 'fold', name: 'Fold', duration: 620, note: 'Dimensional page reveal', transform: 'perspective(600px) rotateX(16deg) translateY(20px)', ease: 'cubic-bezier(.16, 1, .3, 1)', stagger: 70, fromOpacity: 0 },
+  { id: 'stagger', name: 'Stagger', duration: 520, note: 'Sequenced content reveal', transform: 'translateY(30px)', ease: 'cubic-bezier(.16, 1, .3, 1)', stagger: 140, fromOpacity: 0 },
+]
 
 export function buildDesignMarkdown({ palette, font, template, motion }: PackConfig) {
   return `# Design Direction: ${palette.name} / ${font.name}
@@ -74,7 +91,10 @@ A ${template} direction using ${palette.name.toLowerCase()} colour, ${font.name.
 
 - Direction: ${motion.name}
 - Base duration: ${motion.duration}ms
+- Entrance transform: \`${motion.transform}\`
+- Stagger: ${motion.stagger}ms
 - Purpose: ${motion.note}
+- Apply \`.motion-${motion.id}\` from \`motion.css\`. The file includes every preset in the library.
 - Animate opacity and transforms only.
 - Respect \`prefers-reduced-motion\`.
 
@@ -96,7 +116,7 @@ export function buildTokens({ palette, font, motion }: PackConfig) {
   --font-heading: ${font.heading};
   --font-body: ${font.body};
   --motion-duration: ${motion.duration}ms;
-  --motion-ease: cubic-bezier(.16, 1, .3, 1);
+  --motion-ease: ${motion.ease};
   --radius: 12px;
 }
 
@@ -115,14 +135,15 @@ h1, h2, h3 {
 }
 
 export function buildMotionCss({ motion }: PackConfig) {
-  const distance = motion.id === 'kinetic' ? 24 : 10
-  return `.reveal {
-  animation: reveal var(--motion-duration) var(--motion-ease) both;
+  return `/* Selected preset: ${motion.name} */
+${motionPresets.map((preset) => `.motion-${preset.id} {
+  animation: motion-${preset.id} ${preset.duration}ms ${preset.ease} both;
+  animation-delay: calc(var(--motion-order, 0) * ${preset.stagger}ms);
 }
 
-@keyframes reveal {
-  from { opacity: 0; transform: translateY(${distance}px); }
-}
+@keyframes motion-${preset.id} {
+  from { opacity: ${preset.fromOpacity}; transform: ${preset.transform}; }
+}`).join('\n\n')}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
