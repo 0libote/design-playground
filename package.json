@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
+    "test": "bun test",
     "preview": "vite preview"
   },
   "dependencies": {
+    "fflate": "^0.8.3",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
